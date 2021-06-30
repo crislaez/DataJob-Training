@@ -1,0 +1,18 @@
+{
+    "COMMON":{
+      "TITLE":"DataJobs&Training",
+      "NORESULT":"No hay resultados",
+      "JOBS_OFFERS":"Ofertas de empleo",
+      "TRAININGS_OFFERS":"Ofertas de formación",
+      "REGISTER_ON_WEB":"Inscribirme en la web",
+      "OFFERS_DETAILS":"Detalles de la oferta",
+      "TRAINING_DETAILS":"Detalles de la formación",
+      "CENTER":"Centro",
+      "INIT_DATE":"Fecha de inicio",
+      "ALT_DATE":"Fecha de alta",
+      "END_DATE":"Fecha de finalicación",
+      "TOTAl_HOURS":"Horas totales",
+      "ENTRY_HOURS":"Horario de entrada",
+      "EXIT_HOURS":"Horario de salida"
+    }
+  }
