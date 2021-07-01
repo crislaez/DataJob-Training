@@ -7,7 +7,7 @@ import { TrainingPage } from './containers/training.page.component';
 import { TrainingsPageRoutingModule } from './trainings-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { TrainingModule } from '@datajobs/shared/training/training.module';
-
+import { SharedModule } from '@datajobs/shared/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,7 +16,8 @@ import { TrainingModule } from '@datajobs/shared/training/training.module';
     IonicModule,
     TrainingsPageRoutingModule,
     TranslateModule.forChild(),
-    TrainingModule
+    TrainingModule,
+    SharedModule
   ],
   declarations: [
     TrainingsPage,

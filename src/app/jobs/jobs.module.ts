@@ -7,7 +7,7 @@ import { JobPage } from './containers/job.page.component';
 import { JobsPageRoutingModule } from './jobs-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { JobsModule } from '@datajobs/shared/jobs/jobs.module';
-
+import { SharedModule } from '@datajobs/shared/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,7 +16,8 @@ import { JobsModule } from '@datajobs/shared/jobs/jobs.module';
     IonicModule,
     JobsPageRoutingModule,
     TranslateModule.forChild(),
-    JobsModule
+    JobsModule,
+    SharedModule
   ],
   declarations: [
     JobsPage,

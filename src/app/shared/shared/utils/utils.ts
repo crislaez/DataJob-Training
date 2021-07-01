@@ -9,3 +9,8 @@ export const trackById = (_: number, item: any): number => {
   export const emptyObject = (object: any): boolean => {
     return Object.keys(object || {})?.length > 0 ? true : false
   }
+
+  export const gotToTop = (content): void => {
+    content.scrollToTop();
+  }
+

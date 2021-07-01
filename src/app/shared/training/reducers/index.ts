@@ -29,3 +29,11 @@ export const getTraining = (idTraining:string) => createSelector(
   }
 );
 
+export const getTrainingsByMunicipality = (city:string) => createSelector(
+  getTrainings,
+  (training) => {
+    return (training || [])?.filter(({value}) => value?.municipio === city || value?.municipio.includes(city)) || {}
+  }
+);
+
+

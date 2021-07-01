@@ -13,6 +13,13 @@
       "END_DATE":"Fecha de finalicación",
       "TOTAl_HOURS":"Horas totales",
       "ENTRY_HOURS":"Horario de entrada",
-      "EXIT_HOURS":"Horario de salida"
+      "EXIT_HOURS":"Horario de salida",
+      "HOUR":"Horario",
+      "YES":"Si",
+      "NO":"No",
+      "FILTER_BY_PROVINCE":"Filtrar por provincia",
+      "FILTER_BY_MUNICIPALITY":"Filtrar por municipio",
+      "EVERYONE":"Todos",
+      "SEARCH_BY_CITY":"Buscar por ciudad..."
     }
   }

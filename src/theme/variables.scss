@@ -245,8 +245,9 @@
 }
 
 $backColor: white;
-$textColor: #0073BD;
-
+$textColor: #3880FF;
+// $textColor: #0073BD;
+$textCardColor: #030303;
 // REFRES ITEM
 ion-refresher {
   // margin-top: 50px;
@@ -318,15 +319,17 @@ ion-virtual-scroll{
 
 ion-card{
   // width: 40%;
-  width: 92%;
+  width: 94%;
   background: $backColor;
-  // color: black !important;
+  color: $textCardColor !important;
   // --background: rgba(255,255,255,0.1);
 
   //titulo de la card
   ion-card-title{
+    color: $textCardColor !important;
     font-size: 20px;
     text-align: center;
+    text-transform: uppercase;
   }
 
   //contenido de la card
@@ -335,7 +338,7 @@ ion-card{
     text-align: center;
   }
 
-  h3{
+  h3, h4{
     font-weight: bold;
   }
 
@@ -346,9 +349,26 @@ ion-card{
 
   ion-button{
     width: 60%;
-    height: 35px;
-    font-size: 11px;
+    height: 40px;
+    font-size: 14px;
+    // background: $textColor !important;
   }
+
+  ion-icon {
+    font-size: 25px;
+  }
+
+}
+
+ion-item{
+  width: 94%;
+  margin: 0 auto;
+}
+
+form{
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
 }
 
 //efecto riple para las redirecciones como los botones
@@ -399,6 +419,10 @@ ion-card{
   width: 90%;
 }
 
+.width-12{
+  width: 13%;
+}
+
 .width-half{
   width: 40%;
 }
@@ -417,6 +441,10 @@ ion-card{
 
 .margin-top-10{
   margin-top: 10px !important;
+}
+
+.margin-top-30{
+  margin-top: 30px !important;
 }
 
 .chip{
@@ -494,12 +522,6 @@ ion-card{
   }
 }
 
-.form{
-  width: 90%;
-  margin: auto;
-  margin-top: 30px;
-}
-
 .div-container{
   margin-top: 170px;
   width: 100%;
@@ -520,6 +542,16 @@ ion-card{
 .header-container-empty{
   width: 10%;
   height: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  ion-icon{
+    font-size: 27px;
+    color: $backColor;
+  }
 }
 
 .container{

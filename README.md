@@ -1,10 +1,8 @@
-## (front-end) DATAJOBS&TRAINING
+## (front-end) DATAJOB&TRAINING
 
-DataJobs&Training es una aplicación hecha en Ionic (Angular, TypeScript, Sass/Css, Html, Rxjs, Ngrx, Firebase)
+DataJob&Training es una aplicación hecha en Ionic (Angular, TypeScript, Sass/Css, Html, Rxjs, Ngrx, Firebase)
 
-<!-- <img src="https://github.com/crislaez/SearchRepos/blob/master/src/assets/images/foto_proyecto_1.PNG" />
-<hr>
-<img src="https://github.com/crislaez/SearchRepos/blob/master/src/assets/images/foto_proyecto_0.PNG" />
+<img src="https://github.com/crislaez/SearchRepos/blob/master/src/assets/images/foto_proyecto_1.PNG" />
 <hr>
 <img src="https://github.com/crislaez/SearchRepos/blob/master/src/assets/images/foto_proyecto_2.PNG" />
 <hr>
@@ -16,15 +14,11 @@ DataJobs&Training es una aplicación hecha en Ionic (Angular, TypeScript, Sass/C
 <hr>
 <img src="https://github.com/crislaez/SearchRepos/blob/master/src/assets/images/foto_proyecto_5.PNG" />
 <hr>
-<img src="https://github.com/crislaez/SearchRepos/blob/master/src/assets/images/foto_proyecto_6.PNG" />
-<hr>
-<img src="https://github.com/crislaez/SearchRepos/blob/master/src/assets/images/foto_proyecto_7.PNG" />
-<hr> -->
 
 
 ### Que hace el proyecto
 
-DataJobs&Training es una aplicación hecha en Ionic para ver ofertas laborales y formativas dentro del pais vasco con los datos de lanbide
+DataJob&Training es una aplicación hecha en Ionic para ver ofertas laborales y formativas dentro del pais vasco con los datos de lanbide
  
 ### Donde pueden recibir ayuda los usuarios con el proyecto
  

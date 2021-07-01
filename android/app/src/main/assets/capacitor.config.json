@@ -1,0 +1,6 @@
+{
+	"appId": "com.example.datajobandtraining",
+	"appName": "DataJobAndTraining",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

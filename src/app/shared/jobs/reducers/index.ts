@@ -29,3 +29,11 @@ export const getJob = (idJob:string) => createSelector(
   }
 );
 
+
+export const getJobsByProvince = (city:string) => createSelector(
+  getJobs,
+  (jobs) => {
+    return (jobs || [])?.filter(({value}) => value?.provincia === city || value?.provincia.includes(city)) || []
+  }
+);
+
