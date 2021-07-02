@@ -1,6 +1,6 @@
 {
     "COMMON":{
-      "TITLE":"DataJobs&Training",
+      "TITLE":"DataJobsAndTraining",
       "NORESULT":"No hay resultados",
       "JOBS_OFFERS":"Ofertas de empleo",
       "TRAININGS_OFFERS":"Ofertas de formación",
@@ -15,6 +15,7 @@
       "ENTRY_HOURS":"Horario de entrada",
       "EXIT_HOURS":"Horario de salida",
       "HOUR":"Horario",
+      "SEMANAL_HOURS":"Horario semanal",
       "YES":"Si",
       "NO":"No",
       "FILTER_BY_PROVINCE":"Filtrar por provincia",

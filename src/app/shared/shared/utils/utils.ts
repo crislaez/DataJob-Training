@@ -1,3 +1,5 @@
+import { IonContent } from "@ionic/angular";
+
 export const trackById = (_: number, item: any): number => {
     return item.id;
   }
@@ -10,7 +12,7 @@ export const trackById = (_: number, item: any): number => {
     return Object.keys(object || {})?.length > 0 ? true : false
   }
 
-  export const gotToTop = (content): void => {
-    content.scrollToTop();
+  export const gotToTop = (content: IonContent): void => {
+    content.scrollToTop(500);
   }
 

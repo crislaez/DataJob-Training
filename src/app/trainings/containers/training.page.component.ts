@@ -20,17 +20,17 @@ import { Share } from '@capacitor/share';
             <div class="header" no-border>
               <ion-back-button defaultHref="/jobs" class="text-second-color" [text]="''"></ion-back-button>
               <h1 class="text-second-color">{{'COMMON.TRAINING_DETAILS' | translate}}</h1>
-              <div class="header-container-empty" (click)="sharedContent(training?.value?.url)"><ion-icon name="share-social-outline"></ion-icon></div>
+              <div class="header-container-empty" (click)="sharedContent(training?.value?.url)"><ion-icon class="text-color" name="share-social-outline"></ion-icon></div>
             </div>
 
-            <ion-card class="ion-activatable ripple-parent fade-in-card">
+            <ion-card class="fade-in-card">
               <ion-card-header>
                 <ion-card-title class="big-size">{{training?.value?.titulo}}</ion-card-title>
               </ion-card-header>
 
               <ion-card-content class="displays-between">
 
-                <div class="width-max margin-top span-bold"><ion-icon name="business-outline"></ion-icon></div>
+                <div class="width-max margin-top span-bold"><ion-icon class="text-color" name="business-outline"></ion-icon></div>
                 <h3 class="width-max">{{training?.value?.centro}}</h3>
 
                 <div class="width-half margin-top-30 span-bold">{{'COMMON.INIT_DATE' | translate}}:</div>
@@ -55,11 +55,11 @@ import { Share } from '@capacitor/share';
                   <div class="width-half margin-top">{{training?.value?.hora_ini_t}} - {{training?.value?.hora_fin_t}}</div>
                 </ng-template>
 
-                <div class="width-half margin-top span-bold"><ion-icon name="location-outline"></ion-icon></div>
+                <div class="width-half margin-top span-bold"><ion-icon class="text-color" name="location-outline"></ion-icon></div>
                 <div class="width-half margin-top">{{training?.value?.provincia}} {{training?.value?.municipio}}</div>
 
                 <!-- DIAS  -->
-                <h4 class="width-max margin-top">{{'COMMON.HOUR' | translate}}</h4>
+                <h4 class="width-max margin-top">{{'COMMON.SEMANAL_HOURS' | translate}}</h4>
                 <div class="width-max displays-between margin-top-10">
                   <div class="width-12 span-bold" *ngFor="let day of daysKeys()">{{days[day]}}</div>
                   <div class="width-12" *ngFor="let day of daysKeys()">
@@ -71,7 +71,7 @@ import { Share } from '@capacitor/share';
                 <div class="width-max margin-top"><ion-button [href]="training?.value?.url">{{'COMMON.REGISTER_ON_WEB' | translate}}</ion-button></div>
               </ion-card-content>
 
-              <ion-ripple-effect></ion-ripple-effect>
+              <!-- <ion-ripple-effect></ion-ripple-effect> -->
             </ion-card>
           </ng-container>
         </ng-container>
@@ -91,7 +91,7 @@ import { Share } from '@capacitor/share';
 
       <!-- LOADER  -->
       <ng-template #loader>
-        <ion-spinner color="primary"></ion-spinner>
+        <ion-spinner color="light"></ion-spinner>
       </ng-template>
     </div>
   </ion-content>
@@ -122,9 +122,9 @@ export class TrainingPage {
    async sharedContent(url: string){
     await Share.share({
       title: 'Oferta formativa',
-      text: 'Really awesome thing you need to see right meow',
+      text: 'Oferta formativa',
       url: url,
-      dialogTitle: 'Share with buddies',
+      dialogTitle: 'Oferta formativa',
     });
    }
 

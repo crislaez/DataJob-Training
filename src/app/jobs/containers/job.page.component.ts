@@ -20,10 +20,10 @@ import { Share } from '@capacitor/share';
             <div class="header" no-border>
               <ion-back-button defaultHref="/jobs" class="text-second-color" [text]="''"></ion-back-button>
               <h1 class="text-second-color">{{'COMMON.OFFERS_DETAILS' | translate}}</h1>
-              <div class="header-container-empty" (click)="sharedContent(job?.value?.url)"><ion-icon name="share-social-outline"></ion-icon></div>
+              <div class="header-container-empty" (click)="sharedContent(job?.value?.url)"><ion-icon class="text-color" name="share-social-outline"></ion-icon></div>
             </div>
 
-            <ion-card class="ion-activatable ripple-parent fade-in-card">
+            <ion-card class="fade-in-card">
               <ion-card-header>
                 <ion-card-title class="big-size">{{job?.value?.desEmpleo}}</ion-card-title>
               </ion-card-header>
@@ -31,11 +31,11 @@ import { Share } from '@capacitor/share';
               <ion-card-content class="displays-between">
                 <div class="width-max margin-top">{{job?.value?.desPuesto}}</div>
 
-                <div class="width-half margin-top span-bold"><ion-icon name="location-outline"></ion-icon></div>
+                <div class="width-half margin-top span-bold"><ion-icon class="text-color" name="location-outline"></ion-icon></div>
                 <div class="width-half margin-top">{{job?.value?.provincia}} {{job?.value?.municipio}}</div>
 
 
-                <div class="width-half margin-top span-bold"><ion-icon name="calendar-number-outline"></ion-icon></div>
+                <div class="width-half margin-top span-bold"><ion-icon class="text-color" name="calendar-number-outline"></ion-icon></div>
                 <div class="width-half margin-top">{{job?.value?.fecPub}}</div>
 
                 <div class="width-max margin-top"><ion-button [href]="job?.value?.url">{{'COMMON.REGISTER_ON_WEB' | translate}}</ion-button></div>
@@ -63,7 +63,7 @@ import { Share } from '@capacitor/share';
 
       <!-- LOADER  -->
       <ng-template #loader>
-        <ion-spinner color="primary"></ion-spinner>
+        <ion-spinner color="light"></ion-spinner>
       </ng-template>
     </div>
   </ion-content>
@@ -89,10 +89,10 @@ export class JobPage {
 
   async sharedContent(url: string){
     await Share.share({
-      title: 'Oferta formativa',
-      text: 'Really awesome thing you need to see right meow',
+      title: 'Oferta laboral',
+      text: 'Oferta laboral',
       url: url,
-      dialogTitle: 'Share with buddies',
+      dialogTitle: 'Oferta laboral',
     });
    }
 
