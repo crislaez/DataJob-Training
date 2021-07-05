@@ -58,7 +58,7 @@ import { FormControl } from '@angular/forms';
                <!-- INFINITE SCROLL  -->
               <ng-container *ngIf="info?.total as total">
                 <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, total)">
-                  <ion-infinite-scroll-content loadingSpinner="crescent" color="primary">
+                  <ion-infinite-scroll-content class="loadingspinner">
                   </ion-infinite-scroll-content>
                 </ion-infinite-scroll>
               </ng-container>
@@ -81,7 +81,7 @@ import { FormControl } from '@angular/forms';
 
         <!-- LOADER  -->
         <ng-template #loader>
-          <ion-spinner color="light"></ion-spinner>
+          <ion-spinner class="loadingspinner"></ion-spinner>
         </ng-template>
       </div>
 

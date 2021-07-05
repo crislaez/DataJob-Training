@@ -91,7 +91,7 @@ import { Share } from '@capacitor/share';
 
       <!-- LOADER  -->
       <ng-template #loader>
-        <ion-spinner color="light"></ion-spinner>
+        <ion-spinner class="loadingspinner"></ion-spinner>
       </ng-template>
     </div>
   </ion-content>
