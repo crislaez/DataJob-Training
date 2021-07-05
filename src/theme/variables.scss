@@ -254,7 +254,13 @@ $textColor: #0073BD;
 $textCardColor: #030303;
 
 .loadingspinner{
-  color : white;
+  --color: white;
+}
+
+ion-infinite-scroll-content{
+  ion-spinner{
+    margin-top: 0;
+  }
 }
 
 // REFRES ITEM
@@ -277,7 +283,7 @@ ion-spinner {
   margin-left: 45%;
 }
 
-//HEADER PRINCIPAÑ
+//HEADER PRINCIPAL
 ion-header{
   background: $backColor;
   //header principa

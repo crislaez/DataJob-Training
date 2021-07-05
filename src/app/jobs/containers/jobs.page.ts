@@ -59,7 +59,7 @@ import { Platform } from '@ionic/angular';
             <!-- INFINITE SCROLL  -->
             <ng-container *ngIf="info?.total as total">
               <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, total)">
-                <ion-infinite-scroll-content class="loadingspinner">
+                <ion-infinite-scroll-content color="primary" class="loadingspinner">
                 </ion-infinite-scroll-content>
               </ion-infinite-scroll>
             </ng-container>
@@ -130,8 +130,6 @@ export class JobsPage {
       }
     }),
     map(([response, search, perPage]) => {
-      // console.log(perPage)
-      // console.log(response?.length)
       if(!!search){
         return {
           jobs: ((response || []).filter(({value}) => value?.municipio === search.toUpperCase() || value?.municipio.includes(search.toUpperCase())) ||[])?.slice(0, perPage),
@@ -162,6 +160,7 @@ export class JobsPage {
   // DELETE SEARCH
   clearSearch(event): void{
     if(!this.platform.is('mobileweb')) Keyboard.hide();
+    this.search.reset();
     this.searchValue$.next('');
     this.clearAll();
   }
