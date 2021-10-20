@@ -1,25 +1,19 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromTraining from './training.reducer';
+import * as fromTraining from '../reducers/training.reducer';
 
-export const trainingKey = 'training';
-
-export interface State {
-  [trainingKey]: fromTraining.State
-}
-
-export const reducer = fromTraining.reducer;
-
-export const getTrainingState = createFeatureSelector<State, fromTraining.State>(trainingKey);
+export const selectTrainingState = createFeatureSelector<fromTraining.State>(
+  fromTraining.trainingFeatureKey
+);
 
 
 export const getTrainings = createSelector(
-  getTrainingState,
-  fromTraining.getTrainings
+  selectTrainingState,
+  (state) => state.trainings
 );
 
-export const getPending = createSelector(
-  getTrainingState,
-  fromTraining.getPending
+export const getStatus = createSelector(
+  selectTrainingState,
+  (state) => state.status
 );
 
 export const getTraining = (idTraining:string) => createSelector(
@@ -35,5 +29,3 @@ export const getTrainingsByMunicipality = (city:string) => createSelector(
     return (training || [])?.filter(({value}) => value?.municipio === city || value?.municipio.includes(city)) || {}
   }
 );
-
-

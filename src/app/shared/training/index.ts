@@ -1,5 +1,4 @@
-import * as fromTraining from './reducers';
-export * from './actions';
-export * from './services/training.service';
+export * as fromTraining from './selectors/training.selectors';
+export * as TrainingActions from './actions/training.actions';
 export * from './models';
-export { fromTraining }
+

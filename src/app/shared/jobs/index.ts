@@ -1,5 +1,4 @@
-import * as fromJob from './reducers';
-export * from './actions';
-export * from './services/job.service';
+export * as fromJob from './selectors/jobs.selectors';
+export * as JobActions from './actions/job.actions';
 export * from './models';
-export { fromJob };
+

@@ -1,38 +1,27 @@
+import { EntityStatus } from '@datajobs/shared/shared/utils/utils';
 import { createReducer, on } from '@ngrx/store';
-import { JobActions } from '../actions';
+import * as JobActions from '../actions/job.actions';
 import { Job } from '../models';
 
-// interface Status {
-//   pending?: boolean;
-//   error?: string;
-// }
+export const jobFeatureKey = 'job';
+
 
 export interface State{
   jobs?: Job[];
-  pending?: boolean;
-  // page?: number;
-  // total_pages?: number;
+  status?: EntityStatus;
+  error: unknown;
 }
 
 const initialState: State = {
   jobs:[],
-  pending: false,
-  // page: 1,
-  // total_pages: 1,
+  status: EntityStatus.Initial,
+  error:undefined
 }
 
-const jobReducer = createReducer(
+export const reducer = createReducer(
   initialState,
-  on(JobActions.loadJobs, (state) => ({...state, pending: true})),
-  on(JobActions.saveJobs, (state, { jobs }) => ({...state, jobs, pending: false })),
+  on(JobActions.loadJobs, (state) => ({...state, error: undefined, status: EntityStatus.Pending})),
+  on(JobActions.saveJobs, (state, { jobs, error, status }) => ({...state, jobs, error, status })),
 
 );
-
-export function reducer(state: State | undefined, action: JobActions.JobsActionsUnion){
-  return jobReducer(state, action);
-}
-
-export const getJobs = (state: State) => state?.jobs;
-export const getPending = (state: State) => state?.pending;
-
 

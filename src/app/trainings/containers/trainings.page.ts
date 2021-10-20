@@ -1,14 +1,13 @@
-import { Component, ChangeDetectionStrategy, EventEmitter, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { fromTraining, TrainingActions } from '@datajobs/shared/training';
-import { select, Store } from '@ngrx/store';
-import { Observable, combineLatest } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
-import { IonContent, IonInfiniteScroll } from '@ionic/angular';
-import { gotToTop, trackById } from '@datajobs/shared/shared/utils/utils';
-import { Keyboard } from '@capacitor/keyboard';
-import { Platform } from '@ionic/angular';
+import { ChangeDetectionStrategy, Component, EventEmitter, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Keyboard } from '@capacitor/keyboard';
+import { gotToTop, trackById } from '@datajobs/shared/shared/utils/utils';
+import { fromTraining } from '@datajobs/shared/training';
+import { IonContent, IonInfiniteScroll, Platform } from '@ionic/angular';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-trainings',
@@ -23,46 +22,51 @@ import { FormControl } from '@angular/forms';
         </div>
 
         <ng-container *ngIf="(info$ | async) as info">
-          <ng-container *ngIf="!(pending$ |async); else loader">
+          <ng-container *ngIf="(status$ | async) as status">
+            <ng-container *ngIf="status !== 'pending'; else loader">
+              <ng-container *ngIf="status !== 'error';  else serverError">
 
-            <ion-item class="fade-in-card">
-              <ion-label>{{'COMMON.FILTER_BY_MUNICIPALITY' | translate}}</ion-label>
-              <ion-select (ionChange)="changeFilter($any($event))" value="" interface="action-sheet">
-                <ion-select-option value="">{{'COMMON.EVERYONE' | translate}}</ion-select-option>
-                <ion-select-option *ngFor="let municipality of municipalities" [value]="municipality">{{municipality}}</ion-select-option>
-              </ion-select>
-            </ion-item>
+                <ion-item class="fade-in-card item-select">
+                  <ion-label>{{'COMMON.FILTER_BY_MUNICIPALITY' | translate}}</ion-label>
+                  <ion-select (ionChange)="changeFilter($any($event))" [value]="statusComponent?.municipality" interface="action-sheet">
+                    <ion-select-option value="">{{'COMMON.EVERYONE' | translate}}</ion-select-option>
+                    <ion-select-option *ngFor="let municipality of municipalities" [value]="municipality">{{municipality}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
 
-            <form (submit)="searchSubmit($event)" class="fade-in-card">
-              <ion-searchbar color="light" [placeholder]="'COMMON.SEARCH_BY_CITY' | translate" [formControl]="search" (ionClear)="clearSearch($event)"></ion-searchbar>
-            </form>
+                <form (submit)="searchSubmit($event)" class="fade-in-card">
+                  <ion-searchbar color="light" [placeholder]="'COMMON.SEARCH_BY_CITY' | translate" [formControl]="search" (ionClear)="clearSearch($event)"></ion-searchbar>
+                </form>
 
-            <ng-container *ngIf="info?.trainings?.length > 0; else noData">
+                <ng-container *ngIf="info?.trainings?.length > 0; else noData">
 
-              <ion-card class="ion-activatable ripple-parent fade-in-card" *ngFor="let training of info?.trainings; trackBy: trackById" [routerLink]="['/trainings/'+ training?.value?.codigo]">
-                <ion-card-header>
-                  <ion-card-title>{{training?.value?.titulo}}</ion-card-title>
-                </ion-card-header>
+                  <ion-card class="ion-activatable ripple-parent fade-in-card" *ngFor="let training of info?.trainings; trackBy: trackById" [routerLink]="['/trainings/'+ training?.value?.codigo]">
+                    <ion-card-header>
+                      <ion-card-title>{{training?.value?.titulo}}</ion-card-title>
+                    </ion-card-header>
 
-                <ion-card-content class="displays-between margin-top">
-                  <div class="width-half span-bold"><ion-icon class="text-color" name="location-outline"></ion-icon></div>
-                  <div class="width-half">{{training?.value?.municipio}}</div>
+                    <ion-card-content class="displays-between margin-top">
+                      <div class="width-half span-bold"><ion-icon class="text-color" name="location-outline"></ion-icon></div>
+                      <div class="width-half">{{training?.value?.municipio}}</div>
 
-                  <div class="width-half margin-top span-bold"><ion-icon class="text-color" name="calendar-number-outline"></ion-icon></div>
-                  <div class="width-half margin-top">{{training?.value?.f_inicio}}</div>
-                </ion-card-content>
+                      <div class="width-half margin-top span-bold"><ion-icon class="text-color" name="calendar-number-outline"></ion-icon></div>
+                      <div class="width-half margin-top">{{training?.value?.f_inicio}}</div>
+                    </ion-card-content>
 
-                <ion-ripple-effect></ion-ripple-effect>
-              </ion-card>
+                    <ion-ripple-effect></ion-ripple-effect>
+                  </ion-card>
 
-               <!-- INFINITE SCROLL  -->
-              <ng-container *ngIf="info?.total as total">
-                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, total)">
-                  <ion-infinite-scroll-content color="primary" class="loadingspinner">
-                  </ion-infinite-scroll-content>
-                </ion-infinite-scroll>
+                  <!-- INFINITE SCROLL  -->
+                  <ng-container *ngIf="info?.total as total">
+                    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, total)">
+                      <ion-infinite-scroll-content color="primary" class="loadingspinner">
+                      </ion-infinite-scroll-content>
+                    </ion-infinite-scroll>
+                  </ng-container>
+
+
+                </ng-container>
               </ng-container>
-
             </ng-container>
           </ng-container>
         </ng-container>
@@ -71,6 +75,17 @@ import { FormControl } from '@angular/forms';
         <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
           <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
+
+        <!-- IS ERROR -->
+        <ng-template #serverError>
+          <div class="error-serve">
+            <div>
+              <span><ion-icon class="text-second-color big-size" name="cloud-offline-outline"></ion-icon></span>
+              <br>
+              <span class="text-second-color">{{'COMMON.ERROR' | translate}}</span>
+            </div>
+          </div>
+        </ng-template>
 
         <!-- IS NO DATA  -->
         <ng-template #noData>
@@ -103,75 +118,74 @@ export class TrainingsPage {
   municipalities: string[] = ['VITORIA-GASTEIZ', 'DONOSTIA/SAN SEBASTIÁN', 'BILBAO', 'ERRENTERIA', 'ARETXABALETA', 'MUSKIZ', 'IRUN', 'EIBAR', 'AZKOITIA', 'GALDAKAO', 'BARAKALDO', 'GALDAMES', 'ERANDIO', 'ZUMARRAGA', 'LAUDIO/LLODIO', 'URNIETA', 'MARKINA-XEMEIN', 'ARRASATE/MONDRAGON', 'PASAIA', 'PORTUGALETE', 'AMOREBIETA-ETXANO'];
   search = new FormControl('');
   showButton: boolean = false;
-  perPage: number = 15;
+  statusComponent = {
+    municipality:'',
+    search:'',
+    perPage:15,
+  };
 
-  infiniteScroll$ = new EventEmitter();
+  infiniteScroll$ = new EventEmitter<{perPage: number, municipality: string, search: string}>();
   searchValue$ = new EventEmitter();
   reload$ = new EventEmitter();
   selectedMunicipality$ = new EventEmitter();
-  pending$: Observable<boolean> = this.store.pipe(select(fromTraining.getPending));
+  status$ = this.store.pipe(select(fromTraining.getStatus));
 
-  info$: Observable<any> = combineLatest([
-    this.selectedMunicipality$.pipe(startWith('')),
-    this.searchValue$.pipe(startWith('')),
-    this.infiniteScroll$.pipe(startWith(15))
-  ]).pipe(
-    switchMap(([municipality, search, perPage]) => {
-      if(!!municipality){
-        return this.store.pipe(select(fromTraining.getTrainingsByMunicipality(municipality)),
-          map(response => ([response, search, perPage]))
-        )
-      }
-      else{
-        return this.store.pipe(select(fromTraining.getTrainings),
-          map(response => ([response, search, perPage]))
-        )
-      }
-    }),
-    map(([response, search, perPage]) => {
-      if(!!search){
-        return {
-          trainings: ((response || []).filter(({value}) => value?.municipio === search.toUpperCase() || value?.municipio.includes(search.toUpperCase())) || []).slice(0, perPage),
-          total:response?.length
-        }
-      }
-      return {
-        trainings: (response || []).slice(0, perPage),
-        total:response?.length
-      }
+  info$: Observable<any> = this.infiniteScroll$.pipe(
+    startWith(this.statusComponent),
+    switchMap( ({municipality, search, perPage}) => {
+      return this.store.select(fromTraining.getTrainings).pipe(
+        map(trainings => {
+          let result = trainings;
+
+          if(!!municipality){
+            result = (result || [])?.filter(({value}) => value?.municipio === municipality?.toUpperCase() || value?.municipio?.includes(municipality?.toUpperCase()) )
+          }
+
+          if(!!search){
+            result = (result || [])?.filter(({value}) => value?.municipio === search?.toUpperCase() || value?.municipio?.includes(search?.toUpperCase()) )
+          }
+
+          return {
+            trainings: result.slice(0, perPage),
+            total: result?.length
+          }
+        })
+      )
     })
   );
 
-
-  constructor(private route: ActivatedRoute, private router: Router, private store: Store, public platform: Platform) {
-    // this.info$.subscribe(data => console.log(data?.trainings))
-  }
+  constructor(
+    private store: Store,
+    public platform: Platform
+  ) { }
 
 
   // SEARCH
   searchSubmit(event: Event): void{
     event.preventDefault();
     if(!this.platform.is('mobileweb')) Keyboard.hide();
-    this.searchValue$.next(this.search.value);
-    this.clearAll();
+    this.statusComponent = {municipality:'', search: this.search.value, perPage:15 };
+    this.infiniteScroll$.next(this.statusComponent);
+    if(this.ionInfiniteScroll) this.ionInfiniteScroll.disabled = false
   }
 
   // DELETE SEARCH
   clearSearch(event): void{
     if(!this.platform.is('mobileweb')) Keyboard.hide();
     this.search.reset();
-    this.searchValue$.next('');
-    this.clearAll();
+    this.statusComponent = {municipality:'', search:'', perPage:15 };
+    this.infiniteScroll$.next(this.statusComponent);
+    if(this.ionInfiniteScroll) this.ionInfiniteScroll.disabled = false
   }
 
   // INIFINITE SCROLL
   loadData(event, total) {
     setTimeout(() => {
-      this.perPage = this.perPage + 15;
-      if(this.perPage >= total){
+      this.statusComponent = {...this.statusComponent, perPage:(this.statusComponent?.perPage + 15) };
+      if(this.statusComponent?.perPage >= total){
         if(this.ionInfiniteScroll) this.ionInfiniteScroll.disabled = true
       }
-      this.infiniteScroll$.next(this.perPage)
+      this.infiniteScroll$.next(this.statusComponent)
       event.target.complete();
     }, 500);
   }
@@ -180,10 +194,9 @@ export class TrainingsPage {
   doRefresh(event) {
     setTimeout(() => {
       this.search.reset();
-      this.store.dispatch(TrainingActions.loadTrainings());
-      this.searchValue$.next('');
-      this.selectedMunicipality$.next('');
-      this.clearAll();
+      this.statusComponent = {municipality:'', search: '', perPage: 15};
+      this.infiniteScroll$.next(this.statusComponent);
+      if(this.ionInfiniteScroll) this.ionInfiniteScroll.disabled = false
 
       event.target.complete();
     }, 500);
@@ -191,8 +204,10 @@ export class TrainingsPage {
 
   // FILTER
   changeFilter({detail: {value}}): void{
-    this.selectedMunicipality$.next(value);
-    this.clearAll();
+    this.search.reset();
+    this.statusComponent = {search:'', municipality:value, perPage: 15};
+    this.infiniteScroll$.next(this.statusComponent);
+    if(this.ionInfiniteScroll) this.ionInfiniteScroll.disabled = false
   }
 
   // SCROLL EVENT
@@ -201,10 +216,5 @@ export class TrainingsPage {
     else this.showButton = false
   }
 
-  clearAll(): void{
-    this.perPage = 15
-    this.infiniteScroll$.next(this.perPage)
-    if(this.ionInfiniteScroll) this.ionInfiniteScroll.disabled = false
-  }
 
 }

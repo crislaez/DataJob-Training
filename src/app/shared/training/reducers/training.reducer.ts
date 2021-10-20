@@ -1,38 +1,28 @@
 import { createReducer, on } from '@ngrx/store';
-import { TrainingActions } from '../actions';
+import * as TrainingActions from '../actions/training.actions';
 import { Training } from '../models';
+import { EntityStatus } from '@datajobs/shared/shared/utils/utils';
 
-// interface Status {
-//   pending?: boolean;
-//   error?: string;
-// }
+
+export const trainingFeatureKey = 'training';
 
 export interface State{
   trainings?: Training[];
-  pending?: boolean;
-  // page?: number;
-  // total_pages?: number;
+  status?: EntityStatus;
+  error: unknown;
 }
 
 const initialState: State = {
   trainings:[],
-  pending: false,
-  // page: 1,
-  // total_pages: 1,
+  status: EntityStatus.Initial,
+  error:undefined
 }
 
-const trainingReducer = createReducer(
+export const reducer = createReducer(
   initialState,
-  on(TrainingActions.loadTrainings, (state) => ({...state, pending: true})),
-  on(TrainingActions.saveTrainings, (state, { trainings }) => ({...state, trainings, pending: false })),
+  on(TrainingActions.loadTrainings, (state) => ({...state, error: undefined, status: EntityStatus.Pending})),
+  on(TrainingActions.saveTrainings, (state, { trainings, error, status }) => ({...state, trainings, error, status })),
 
 );
-
-export function reducer(state: State | undefined, action: TrainingActions.TrainingsActionsUnion){
-  return trainingReducer(state, action);
-}
-
-export const getTrainings = (state: State) => state?.trainings;
-export const getPending = (state: State) => state?.pending;
 
 

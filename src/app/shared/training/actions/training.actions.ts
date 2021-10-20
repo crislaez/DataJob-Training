@@ -1,15 +1,17 @@
 import { createAction, props, union} from '@ngrx/store';
 import { Training } from '../models';
-
-export const loadTrainings = createAction('[Training] Load Trainings');
-export const saveTrainings = createAction('[Training] Save Trainings', props<{trainings: Training[]}>());
+import { EntityStatus } from '@datajobs/shared/shared/utils/utils';
 
 
-const all = union({
-  loadTrainings,
-  saveTrainings
-})
+export const loadTrainings = createAction(
+  '[Training] Load Trainings'
+);
 
-export type TrainingsActionsUnion = typeof all;
+export const saveTrainings = createAction(
+  '[Training] Save Trainings',
+  props<{ trainings: Training[], error:unknown, status: EntityStatus }>()
+);
+
+
 
 

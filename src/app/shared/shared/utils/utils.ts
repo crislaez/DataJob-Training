@@ -16,3 +16,9 @@ export const trackById = (_: number, item: any): number => {
     content.scrollToTop(500);
   }
 
+  export enum EntityStatus {
+    Initial = 'initial',
+    Pending = 'pending',
+    Loaded = 'loaded',
+    Error = 'error'
+  };

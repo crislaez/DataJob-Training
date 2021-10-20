@@ -2,6 +2,7 @@
     "COMMON":{
       "TITLE":"DataJobsAndTraining",
       "NORESULT":"No hay resultados",
+      "ERROR":"Ha ocurrido un error, desliza hacia abajo para recargar",
       "JOBS_OFFERS":"Ofertas de empleo",
       "TRAININGS_OFFERS":"Ofertas de formación",
       "REGISTER_ON_WEB":"Inscribirme en la web",
@@ -21,6 +22,8 @@
       "FILTER_BY_PROVINCE":"Filtrar por provincia",
       "FILTER_BY_MUNICIPALITY":"Filtrar por municipio",
       "EVERYONE":"Todos",
-      "SEARCH_BY_CITY":"Buscar por ciudad..."
+      "SEARCH_BY_CITY":"Buscar por ciudad...",
+      "ERROR_LOAD_JOBS":"Error al cargar las ofertas laborales",
+      "ERROR_LOAD_TRAININGS":"Error al cargar las ofertas formativas"
     }
   }

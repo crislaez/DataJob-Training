@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { NotificationModule } from '@datajobs/shared/notification/notification.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { JobEffects } from './effects/job.effects';
-import * as fromJob from './reducers';
-
+import * as fromJob from './reducers/job.reducer';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    StoreModule.forFeature(fromJob.jobKey, fromJob.reducer),
+    TranslateModule.forChild(),
+    NotificationModule,
+    StoreModule.forFeature(fromJob.jobFeatureKey, fromJob.reducer),
     EffectsModule.forFeature([JobEffects])
   ]
 })

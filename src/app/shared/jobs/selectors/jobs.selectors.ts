@@ -1,25 +1,20 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromJob from './job.reducer';
+import * as fromJob from '../reducers/job.reducer';
 
-export const jobKey = 'job';
+export const selectBibleState = createFeatureSelector<fromJob.State>(
+  fromJob.jobFeatureKey
+);
 
-export interface State {
-  [jobKey]: fromJob.State
-}
-
-export const reducer = fromJob.reducer;
-
-export const getJobState = createFeatureSelector<State, fromJob.State>(jobKey);
 
 
 export const getJobs = createSelector(
-  getJobState,
-  fromJob.getJobs
+  selectBibleState,
+  (state) => state.jobs
 );
 
-export const getPending = createSelector(
-  getJobState,
-  fromJob.getPending
+export const getStatus = createSelector(
+  selectBibleState,
+  (state) => state.status
 );
 
 export const getJob = (idJob:string) => createSelector(
