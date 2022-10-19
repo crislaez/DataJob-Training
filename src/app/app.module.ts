@@ -1,5 +1,7 @@
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -10,14 +12,12 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { environment } from '../environments/environment';
 import * as appConfig from './app-config';
 import { AppRoutingModule } from './app-routing.module';
-import { RootComponent } from './core';
 import { CoreModule } from './core/core.module';
 import { ENVIRONMENT } from './core/externals';
 import { appInitTranslations, createTranslateLoader } from './core/i18n/utils/custom-18n-functions';
+import { RootComponent } from './core/layout/root.page';
 import { CoreConfigService } from './core/services/core-config.service';
 import { HttpErrorInterceptor } from './core/services/http-error.interceptor';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 export function appInitializerFactory(translate: TranslateService, coreConfig: CoreConfigService): Function {
   coreConfig.importConfig(appConfig);

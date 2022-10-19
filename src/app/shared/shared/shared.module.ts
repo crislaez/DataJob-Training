@@ -9,8 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    TranslateModule.forChild()
+    IonicModule
   ],
   exports:[
     FormsModule,

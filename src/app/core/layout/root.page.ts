@@ -1,54 +1,60 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
-
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { filter, map, shareReplay } from 'rxjs/operators';
+import { NotificationModalComponent } from 'src/app/shared-ui/notification-modal/notification-modal.component';
 
 @Component({
   selector: 'app-root',
   template:`
   <ion-app >
-   <!-- CABECERA  -->
-   <ion-header no-border >
-     <ion-toolbar mode="md|ios">
-       <!-- <ion-button fill="clear" size="small" slot="start" (click)="open()">
-         <ion-menu-button class="text-color"></ion-menu-button>
-       </ion-button> -->
-       <ion-title class="text-color" >{{'COMMON.TITLE' | translate}}</ion-title>
-       <!-- <div size="small" slot="end">
-       </div> -->
+   <ion-header class="ion-no-border" >
+     <ion-toolbar *ngIf="(currentSection$ | async) as currentSection">
+
+      <ion-back-button
+        *ngIf="!isNotShowBackButtons?.includes(currentSection)"
+        class="text-color"
+        slot="start"
+        [defaultHref]="redirectTo(currentSection)"
+        [text]="''">
+      </ion-back-button>
+
+       <ion-title
+        class="text-color" >
+        {{'COMMON.TITLE' | translate}}
+        </ion-title>
+
+
+       <ion-icon
+          class="text-color"
+          slot="end"
+          name="ellipsis-horizontal-outline"
+          (click)="presentModal()">
+        </ion-icon>
      </ion-toolbar>
    </ion-header>
-
-   <!-- MENU LATERAL  -->
-   <!-- <ion-menu side="start" menuId="first" contentId="main">
-     <ion-header>
-       <ion-toolbar >
-         <ion-title class="text-color" >Menu</ion-title>
-       </ion-toolbar>
-     </ion-header>
-
-     <ion-content *ngIf="(menu$ | async) as menu">
-       <ion-item class="text-color" *ngFor="let item of menu" [routerLink]="['/genre/'+item?.id]" (click)="deleteMovieByIdGenre()">{{item?.name}}</ion-item>
-     </ion-content >
-   </ion-menu> -->
 
    <!-- RUTER  -->
    <ion-router-outlet id="main"></ion-router-outlet>
 
    <!-- TAB FOOTER  -->
    <ion-tabs >
-     <ion-tab-bar  [translucent]="true" slot="bottom">
-       <ion-tab-button class="text-color" [routerLink]="['jobs']">
+     <ion-tab-bar [translucent]="true" slot="bottom" *ngIf="(currentSection$ | async) as currentSection">
+       <ion-tab-button
+        [ngClass]="{'active-class': currentSection?.includes('jobs')}"
+        class="text-color"
+        [routerLink]="['jobs']">
         <ion-icon name="bag-outline"></ion-icon>
+        <ion-label>{{ 'COMMON.JOBS' | translate }}</ion-label>
        </ion-tab-button>
 
-       <ion-tab-button class="text-color" [routerLink]="['trainings']">
+       <ion-tab-button
+        [ngClass]="{'active-class': currentSection?.includes('trainings')}"
+        class="text-color"
+        [routerLink]="['trainings']">
         <ion-icon name="document-text-outline"></ion-icon>
+        <ion-label>{{ 'COMMON.TRAININGS' | translate }}</ion-label>
        </ion-tab-button>
-
-       <!-- <ion-tab-button class="text-color" [routerLink]="['search']">
-         <ion-icon name="search-outline"></ion-icon>
-       </ion-tab-button> -->
 
      </ion-tab-bar>
    </ion-tabs>
@@ -59,29 +65,41 @@ import { MenuController } from '@ionic/angular';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RootComponent {
+  isNotShowBackButtons = ['jobs','trainings'];
 
-  constructor(private menu: MenuController, private router: Router) {
-    // this.menu$.subscribe(data => console.log(data))
+  currentSection$ = this.router.events.pipe(
+    filter((event: any) => event instanceof NavigationStart),
+    map((event: NavigationEnd) => {
+      const { url = ''} = event || {};
+
+      const [ , route = null, secondRouter = null] = url?.split('/') || [];
+      if(secondRouter) return url
+      return route || 'jobs';
+    }),
+    shareReplay(1)
+  );
+
+
+  constructor(
+    private router: Router,
+    private modalController: ModalController,
+  ) { }
+
+
+  redirectTo(currentSection:any): string{
+    if(currentSection?.includes('jobs')) return '/jobs'
+    if(currentSection?.includes('trainings')) return '/trainings'
+    return '/jobs';
   }
 
+  // OPEN FILTER MODAL
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: NotificationModalComponent,
+    });
 
-  open() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
-  }
-
-  redirectTo(passage: string): void{
-    this.router.navigate(['/chapter/'+passage])
-    this.menu.close('first')
-  }
-
-  openEnd() {
-    this.menu.close();
-  }
-
-  deleteMovieByIdGenre(): void{
-    // this.store.dispatch(MovieActions.deleteMovieGenre())
-    this.openEnd();
+    modal.present();
+    await modal.onDidDismiss();
   }
 
 

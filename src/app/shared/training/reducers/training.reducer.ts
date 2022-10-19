@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as TrainingActions from '../actions/training.actions';
 import { Training } from '../models';
-import { EntityStatus } from '@datajobs/shared/shared/utils/utils';
+import { EntityStatus } from '@datajobs/shared/utils/functions';
 
 
 export const trainingFeatureKey = 'training';

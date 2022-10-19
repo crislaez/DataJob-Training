@@ -1,0 +1,16 @@
+@import '../../../../theme/variables.scss';
+
+ion-button{
+  --border-radius: 5px !important;
+  --background: none;
+  color: $tertiary;
+  width: 15%;
+}
+
+app-item-card{
+  width: 48%;
+}
+
+app-header{
+  width: 100%;
+}

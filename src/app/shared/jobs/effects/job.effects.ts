@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as NotificationActions from '@datajobs/shared/notification/actions/notification.actions';
-import { EntityStatus } from '@datajobs/shared/shared';
+import { EntityStatus } from '@datajobs/shared/utils/functions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';

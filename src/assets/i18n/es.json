@@ -1,12 +1,12 @@
 {
     "COMMON":{
-      "TITLE":"DataJobsAndTraining",
+      "TITLE":"Euskalan",
       "NORESULT":"No hay resultados",
       "ERROR":"Ha ocurrido un error, desliza hacia abajo para recargar",
       "JOBS_OFFERS":"Ofertas de empleo",
       "TRAININGS_OFFERS":"Ofertas de formación",
       "REGISTER_ON_WEB":"Inscribirme en la web",
-      "OFFERS_DETAILS":"Detalles de la oferta",
+      "DETAILS":"Detalles",
       "TRAINING_DETAILS":"Detalles de la formación",
       "CENTER":"Centro",
       "INIT_DATE":"Fecha de inicio",
@@ -18,12 +18,21 @@
       "HOUR":"Horario",
       "SEMANAL_HOURS":"Horario semanal",
       "YES":"Si",
+      "JOBS":"Trabajos",
+      "TRAININGS":"Formaciones",
       "NO":"No",
       "FILTER_BY_PROVINCE":"Filtrar por provincia",
       "FILTER_BY_MUNICIPALITY":"Filtrar por municipio",
       "EVERYONE":"Todos",
+      "SEARCH_BY_JOB":"Buscar por trabajo...",
+      "SEARCH_BY_TRAINING":"Buscar por formacion...",
       "SEARCH_BY_CITY":"Buscar por ciudad...",
+      "SEARCH_BY_MUNICIPALITY":"Buscar por municipio...",
       "ERROR_LOAD_JOBS":"Error al cargar las ofertas laborales",
-      "ERROR_LOAD_TRAININGS":"Error al cargar las ofertas formativas"
+      "ERROR_LOAD_TRAININGS":"Error al cargar las ofertas formativas",
+      "CREATE_BY":"by Crislaez",
+      "APP_DESCRIPTION":"Euskalan it is an application made in Ionic to see job and training offers within the Basque Country with the data of lanbide",
+      "APP_FIND":"Any questions or problems, you can contact me at crislaez30@gmail.com, or through the following links",
+      "APP_FAREWELL":"Thank you very much :)"
     }
   }

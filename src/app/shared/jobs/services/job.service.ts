@@ -14,6 +14,7 @@ export class JobService {
 
 
   getJobs(): Observable<any>{
+
     return this.firebase.list('/jobs').snapshotChanges().pipe(
       map(response => {
         return (response || []).map(item => {

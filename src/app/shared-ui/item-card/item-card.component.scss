@@ -1,0 +1,25 @@
+@import '../../../theme/variables';
+
+:host{
+  width: 100%;
+
+  ion-card{
+    width: 100%;
+    min-height: 195px;
+    margin: 0px;
+    margin-bottom: 20px;
+
+    ion-card-header, ion-card-content{
+      padding: 10px !important;
+    }
+
+
+    ion-card-title{
+      font-size: 15px !important;
+      color: $tertiary !important;
+      // text-transform: lowercase;
+    }
+  }
+
+}
+

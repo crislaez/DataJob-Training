@@ -13,7 +13,8 @@ export class TrainingService {
 
 
   getTrainings(): Observable<any>{
-    return this.firebase.list('/training').snapshotChanges().pipe(
+    // training
+    return this.firebase.list('/formations').snapshotChanges().pipe(
       map(response => {
         return (response || [])?.map(item => {
           return {

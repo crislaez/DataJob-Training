@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">DataJobAndTraining</string>
-    <string name="title_activity_main">DataJobAndTraining</string>
-    <string name="package_name">com.example.datajobandtraining</string>
-    <string name="custom_url_scheme">com.example.datajobandtraining</string>
+    <string name="app_name">Euskalan</string>
+    <string name="title_activity_main">Euskalan</string>
+    <string name="package_name">com.example.euskalan</string>
+    <string name="custom_url_scheme">com.example.euskalan</string>
 </resources>

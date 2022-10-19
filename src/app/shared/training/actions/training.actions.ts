@@ -1,6 +1,6 @@
-import { createAction, props, union} from '@ngrx/store';
+import { EntityStatus } from '@datajobs/shared/utils/functions';
+import { createAction, props } from '@ngrx/store';
 import { Training } from '../models';
-import { EntityStatus } from '@datajobs/shared/shared/utils/utils';
 
 
 export const loadTrainings = createAction(

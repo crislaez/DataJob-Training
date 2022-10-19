@@ -1,4 +1,5 @@
-import { EntityStatus } from '@datajobs/shared/shared/utils/utils';
+
+import { EntityStatus } from '@datajobs/shared/utils/functions';
 import { createReducer, on } from '@ngrx/store';
 import * as JobActions from '../actions/job.actions';
 import { Job } from '../models';

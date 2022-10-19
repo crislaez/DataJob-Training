@@ -24,6 +24,7 @@
     "@capacitor/core": "3.0.2",
     "@capacitor/keyboard": "^1.0.2",
     "@capacitor/share": "^1.0.2",
+    "@capacitor/storage": "^1.2.5",
     "@ionic-native/social-sharing": "^4.20.0",
     "@ionic/angular": "^5.5.2",
     "@ionic/pwa-elements": "^3.0.2",
